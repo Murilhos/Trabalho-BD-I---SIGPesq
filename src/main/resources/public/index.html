@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIGPesq - Projetos de pesquisa</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; display: flex; min-height: 100vh; font-family: system-ui, sans-serif; background: #f4f5f9; color: #1c2740; }
+    aside { width: 220px; background: #14294a; color: #fff; padding: 20px 14px; flex-shrink: 0; }
+    aside h1 { margin: 0; font-size: 20px; }
+    aside small { color: #9fb0cf; }
+    aside nav { margin-top: 24px; display: flex; flex-direction: column; gap: 4px; }
+    aside nav span { padding: 8px 10px; border-radius: 6px; font-size: 14px; color: #6f83a8; }
+    aside nav span.ativo { background: #2b4673; color: #fff; }
+    main { flex: 1; padding: 28px; min-width: 0; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    header h2 { margin: 0; }
+    button { cursor: pointer; border: 0; border-radius: 6px; padding: 9px 16px; font-size: 14px; }
+    .primario { background: #2563eb; color: #fff; }
+    .secundario { background: #e5e8f0; }
+    .tabela { background: #fff; border-radius: 8px; overflow-x: auto; box-shadow: 0 1px 3px #0002; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid #eceef4; }
+    th { background: #f8f9fc; color: #55627d; font-weight: 600; }
+    .selo { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; background: #dbeafe; color: #1e40af; }
+    .vazio { padding: 24px; text-align: center; color: #6b7690; }
+    dialog { border: 0; border-radius: 10px; padding: 24px; width: min(520px, 94vw); box-shadow: 0 10px 40px #0005; }
+    dialog::backdrop { background: #0008; }
+    dialog h3 { margin-top: 0; }
+    label { display: block; margin-top: 12px; font-size: 13px; font-weight: 600; }
+    input, select, textarea { width: 100%; margin-top: 4px; padding: 8px; border: 1px solid #c5cbd8; border-radius: 6px; font: inherit; }
+    .linha { display: flex; gap: 12px; }
+    .linha > div { flex: 1; }
+    .acoes { margin-top: 18px; display: flex; justify-content: flex-end; gap: 8px; }
+    #erro { margin-top: 12px; padding: 9px 12px; border-radius: 6px; background: #fee2e2; color: #991b1b; font-size: 13px; }
+    #erro:empty { display: none; }
+    @media (max-width: 700px) { aside { display: none; } }
+  </style>
+</head>
+<body>
+  <aside>
+    <h1>SIGPesq</h1>
+    <small>Gestão de pesquisa</small>
+    <nav>
+      <span class="ativo">Projetos de pesquisa</span>
+      <span>Participantes (em breve)</span>
+      <span>Vínculos (em breve)</span>
+      <span>Produções (em breve)</span>
+      <span>Financiamentos (em breve)</span>
+    </nav>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <h2>Projetos de pesquisa</h2>
+        <small>Cadastro e acompanhamento das pesquisas.</small>
+      </div>
+      <button class="primario" id="novo">Novo projeto</button>
+    </header>
+
+    <div class="tabela">
+      <table>
+        <thead>
+          <tr><th>Código</th><th>Título</th><th>Coordenador</th><th>Situação</th><th>Período</th></tr>
+        </thead>
+        <tbody id="corpo"></tbody>
+      </table>
+      <div id="vazio" class="vazio" hidden>Nenhum projeto cadastrado.</div>
+    </div>
+  </main>
+
+  <dialog id="dlg">
+    <form id="form">
+      <h3>Cadastrar projeto</h3>
+      <div class="linha">
+        <div><label>Código *<input name="codigo" maxlength="20" required></label></div>
+        <div>
+          <label>Situação *
+            <select name="situacao">
+              <option>Em andamento</option>
+              <option>Concluido</option>
+              <option>Cancelado</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <label>Título *<input name="titulo" maxlength="200" required></label>
+      <label>Descrição *<textarea name="descricao" rows="3" required></textarea></label>
+      <div class="linha">
+        <div><label>Data de início *<input type="date" name="dataInicio" required></label></div>
+        <div><label>Data de término *<input type="date" name="dataTermino" required></label></div>
+      </div>
+      <label>Coordenador principal (docente) *
+        <select name="idCoordenador" id="coord" required></select>
+      </label>
+      <div id="erro"></div>
+      <div class="acoes">
+        <button type="button" class="secundario" id="cancelar">Cancelar</button>
+        <button type="submit" class="primario">Salvar projeto</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

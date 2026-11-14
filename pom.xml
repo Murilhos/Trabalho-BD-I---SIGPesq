@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>sigpesq</groupId>
+    <groupId>br.ufes</groupId>
     <artifactId>sigpesq</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -21,11 +21,11 @@
             <version>8.4.0</version>
         </dependency>
 
-        <!-- Jakarta Bean Validation API -->
+        <!-- Jakarta Bean Validation API (3.0.x e a versao que o Hibernate Validator 8.0 implementa) -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.0</version>
+            <version>3.0.2</version>
         </dependency>
 
         <!-- Hibernate Validator (Implementacao) -->
@@ -35,14 +35,14 @@
             <version>8.0.1.Final</version>
         </dependency>
 
-        <!-- Jakarta Expression Language (Obrigatorio para o Hibernate Validator standalone) -->
+        <!-- Jakarta Expression Language (Obrigatorio para o Hibernate Validator rodar standalone) -->
         <dependency>
             <groupId>org.glassfish.expressly</groupId>
             <artifactId>expressly</artifactId>
             <version>5.0.0</version>
         </dependency>
 
-        <!-- Gson (Para converter objetos Java <-> JSON facilmente nas rotas HTTP) -->
+        <!-- Gson: converte objetos Java em JSON (e vice-versa) para a API -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -52,12 +52,13 @@
 
     <build>
         <plugins>
+            <!-- Permite rodar com: mvn compile exec:java -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <mainClass>sigpesq.Main</mainClass>
+                    <mainClass>br.ufes.sigpesq.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
